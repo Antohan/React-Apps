@@ -4,15 +4,14 @@ const TodoForm = ({addTodo}) => {
     let input;
 
     return (
-        <div>
-            <input ref={node => {input = node;}} />
-            <button onClick={() => {
-                addTodo(input.value);
-                input.value = '';
-            }}>
-                +
-            </button>
-        </div>
+        <form onSubmit={(e) => {
+            e.preventDefault();
+            addTodo(input.value);
+            input.value = '';    
+        }}>
+            <input className="form-control col-md-12" ref={node => { input = node; }} />
+            <br />
+        </form>
     );
 };
 
