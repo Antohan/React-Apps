@@ -2,13 +2,18 @@ import React, { Component } from 'react';
 import WeatherDisplay from './WeatherDisplay';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import { Navbar, NavItem, Nav, Grid, Row, Col } from 'react-bootstrap';
+import InputForm from './InputForm';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      activePlace: 0
+      activePlace: 0      
     }
+  }
+
+  handleSearch = (text) => {
+    this.setState({ city: text})
   }
 
   render() {
@@ -25,6 +30,7 @@ class App extends Component {
         <Grid>
           <Row>
             <Col md={4} sm={4}>
+              <InputForm onSearchCity={this.handleSearch} />
               <h3>Select a city</h3>
               <Nav
                 bsStyle="pills"
@@ -40,7 +46,7 @@ class App extends Component {
               </Nav>
             </Col>
             <Col md={8} sm={8}>
-                <WeatherDisplay key={activePlace} zip={PLACES[activePlace].zip} />
+                <WeatherDisplay key={activePlace} city={PLACES[activePlace].name} />
             </Col>
           </Row>
         </Grid>
@@ -51,10 +57,9 @@ class App extends Component {
 }
 
 const PLACES = [
-  { name: "Palo Alto", zip: "94303"},
-  { name: "San Jose", zip: "94088"},
-  { name: "Santa Cruz", zip: "95062"},
-  { name: "Honolulu", zip: "96803"}
+  { name: "Moscow"},
+  { name: "Novosibirsk"},
+  { name: "Krasnoyarsk"}
 ];
 
 export default App;
